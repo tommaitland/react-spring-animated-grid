@@ -34,7 +34,7 @@ export const calculateLayout = (
   
   const nextRow = () => {
     currentRow += 1
-    currentTopOffset += marginTop + Math.max(elHeights) + marginBottom
+    currentTopOffset += marginTop + Math.max(...elHeights) + marginBottom
     currentLeftOffset = 0
     spaceRemainingX = containerWidth
     
