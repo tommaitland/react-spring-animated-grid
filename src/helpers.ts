@@ -29,18 +29,23 @@ export const calculateLayout = (
   let currentRow = 0
   let currentTopOffset = 0
   let currentLeftOffset = 0
-  let spaceRemainingX = containerWidth
+  let spaceRemainingX = containerWidth;
+  let elHeights = [defaultItemHeight];
   
   const nextRow = () => {
     currentRow += 1
-    currentTopOffset += marginTop + defaultItemHeight + marginBottom
+    currentTopOffset += marginTop + Math.max(elHeights) + marginBottom
     currentLeftOffset = 0
     spaceRemainingX = containerWidth
+    
+    // reset item heights for a new row
+    elHeights = [defaultItemHeight];
   }
 
   const positions: Position[] = []
   elements.forEach((e, i) => {
-    let elementWidth = refMeasures[i].width
+    let elementWidth = refMeasures[i].width;
+    elHeights.push(refMeasures[i].height);
 
     const necessarySpaceX = marginLeft + elementWidth + marginRight
     if (
